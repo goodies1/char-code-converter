@@ -1,0 +1,188 @@
+
+<html>
+<head>
+<title>KG_09 Web tools: CharCode Translator</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+	body {
+	background-color: #000000;
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+	color: #fff;
+	margin: 0;
+	padding: 0;
+	}
+
+	h2 {
+	font-size: 36px;
+	text-align: center;
+	margin-top: 50px;
+	}
+
+	h3 {
+	font-size: 24px;
+	text-align: center;
+	}
+
+	h4 {
+	font-size: 20px;
+	text-align: center;
+	}
+
+	p {
+	font-size: 18px;
+	text-align: center;
+	line-height: 1.5;
+	}
+
+	form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 50px;
+	}
+
+	textarea {
+	padding: 10px;
+	border-radius: 5px;
+	border: none;
+	background-color: #2f2f2f;
+	color: #fff;
+	font-size: 16px;
+	margin-bottom: 20px;
+	width: 80%;
+	resize: none;
+	}
+
+
+	a {
+	color: #fff;
+	text-decoration: none;
+	font-size: 16px;
+	margin-bottom: 20px;
+	}
+
+	a:hover {
+	text-decoration: underline;
+	}
+	input[type=button], button {
+	font-size: 1.2rem;
+	background-color: #4caf50;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	margin-bottom: 20px;
+	}
+	input[type=button]:hover, button:hover {
+	background-color: #1a8cd8;
+	}
+
+	@media only screen and (max-width: 768px) {
+	h2 {
+		font-size: 24px;
+	}
+
+	h3 {
+		font-size: 20px;
+	}
+
+	h4 {
+		font-size: 18px;
+	}
+
+	p {
+		font-size: 16px;
+	}
+
+	textarea, button, a {
+		width: 70%;
+	}
+	}
+</style>
+
+<script type="text/javascript"><!-- 
+	function runFromCharCode()
+	{
+		input = document.fromCharCode.input.value;
+		//alert(input);
+		output = eval("String.fromCharCode(" + input + ")");
+		//alert(output);
+		document.fromCharCode.output.value = output;
+	}
+
+	function runCharCodeAt()
+	{
+		input = document.charCodeAt.input.value;
+		//alert(input);
+		output = "";
+		for(i=0; i<input.length; ++i)
+		{
+			if(output != "") output += ", ";
+			output += input.charCodeAt(i);
+		}
+		//alert(output);
+		document.charCodeAt.output.value = 'document.documentElement.innerHTML=String.fromCharCode(' + output + ');';
+	}
+
+	function downloadFromCharCode() {
+			var output = document.forms["fromCharCode"]["output"].value;
+			var blob = new Blob([output], {type: "text/plain"});
+			var url = window.URL.createObjectURL(blob);
+			var link = document.getElementById("fromCharCodeDownload");
+			link.href = url;
+			link.click();
+			window.URL.revokeObjectURL(url);
+	}
+	function downloadCharCodeAt() {
+			var output = document.forms["charCodeAt"]["output"].value;
+			var blob = new Blob([output], {type: "text/plain"});
+			var url = window.URL.createObjectURL(blob);
+			var link = document.getElementById("charCodeAtDownload");
+			link.href = url;
+			link.click();
+			window.URL.revokeObjectURL(url);
+	}
+//--></script>
+
+
+</head>
+
+<body>
+<center>
+	<a href="#"><h2 style="color: #e6bf00;">HTML <span style="color: red;">♻</span>  JS converter</h2></a>
+</center>
+
+
+<center>
+	<FORM NAME=fromCharCode>
+		<h4 style="color: #e01673;">JS to HTML</h4>
+		<TEXTAREA ROWS=4 COLS=30 NAME=input>paste your JS code here (ex:85, 110, 99, 108, 101, 32, 74, 105, 109)</TEXTAREA>
+		<INPUT TYPE=Button VALUE="convert" onClick="runFromCharCode()">
+		<TEXTAREA ROWS=4 COLS=30 NAME=output></TEXTAREA>
+		<br>
+		<a id="fromCharCodeDownload" download="html.txt" style="display:none">Download fromCharCode Output</a>
+		<button type="button" onclick="downloadFromCharCode()">Download HTML Output</button>
+	</FORM>
+
+	<br><HR><br>
+
+	<FORM NAME=charCodeAt>
+		<h4 style="color: #e01673;">HTML to JS</h4>
+		<TEXTAREA ROWS=4 COLS=30 NAME=input>paste your HTML code here</TEXTAREA>
+		<INPUT TYPE=Button VALUE="  convert " onClick="runCharCodeAt()">
+		<TEXTAREA ROWS=4 COLS=30 NAME=output></TEXTAREA>
+		<br>
+		<a id="charCodeAtDownload" download="js.txt" style="display:none">Download charCodeAt Output</a>
+		<button type="button" onclick="downloadCharCodeAt()">Download JS Output</button>
+	</FORM>
+	<br><br>
+	<h4 style="color: #ff9b00; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Designed by &nbsp;<a href="#" class="footer_link">Kg_09</a> with 💖</h4>
+</center>
+
+</body>
+</html>
